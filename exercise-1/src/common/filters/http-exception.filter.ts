@@ -4,13 +4,14 @@ import {
     ArgumentsHost,
     HttpException,
     HttpStatus,
+    Inject,
   } from '@nestjs/common';
   import { Request, Response } from 'express';
-
+  import { Logger } from 'nestjs-pino';
   
   @Catch()
   export class AllExceptionsFilter implements ExceptionFilter {
-    constructor() {}
+    constructor(@Inject(Logger) private readonly logger: Logger) {}
   
     catch(exception: unknown, host: ArgumentsHost) {
       const ctx = host.switchToHttp();

@@ -3,15 +3,18 @@ import { ValidationPipe } from '@nestjs/common';
 import { ResponseInterceptor } from './common/interceptors/response.interceptor';
 import { AllExceptionsFilter } from './common/filters/http-exception.filter';
 import { AppModule } from './app.module';
+import { Logger, LoggerErrorInterceptor } from 'nestjs-pino';
 
 async function bootstrap() {
   const app = await NestFactory.create(AppModule);
   app.useGlobalPipes(new ValidationPipe());
+  app.useLogger(app.get(Logger));
   app.useGlobalInterceptors(new ResponseInterceptor());
   app.setGlobalPrefix('api');
 
-  app.useGlobalFilters(new AllExceptionsFilter());
-  
+  app.useGlobalInterceptors(new LoggerErrorInterceptor());
+  app.useGlobalFilters(new AllExceptionsFilter(app.get(Logger)));
+
   const PORT = process.env.PORT || 3000;
 
 

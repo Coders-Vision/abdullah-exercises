@@ -1,4 +1,8 @@
-import { Injectable, NotFoundException } from '@nestjs/common';
+import {
+  Injectable,
+  InternalServerErrorException,
+  NotFoundException,
+} from '@nestjs/common';
 import { CreateBookDto } from './dto/create-book.dto';
 import { UpdateBookDto } from './dto/update-book.dto';
 import { InjectRepository } from '@nestjs/typeorm';
@@ -13,8 +17,12 @@ export class BooksService {
   ) {}
 
   async create(createBookDto: CreateBookDto): Promise<Book> {
-    const menu = this.bookRepository.create(createBookDto);
-    return await this.bookRepository.save(menu);
+    try {
+      const menu = this.bookRepository.create(createBookDto);
+      return await this.bookRepository.save(menu);
+    } catch (error) {
+      throw new InternalServerErrorException(error);
+    }
   }
 
   async findAll(): Promise<Book[]> {
@@ -30,16 +38,27 @@ export class BooksService {
   }
 
   async update(id: string, updateBookDto: UpdateBookDto): Promise<Book> {
-    const book = await this.findOne(id);
-    Object.assign(book, updateBookDto);
-    return await this.bookRepository.save(book);
+    try {
+      const book = await this.findOne(id);
+      if (!book) {
+        throw new NotFoundException('Book not found!');
+      }
+      Object.assign(book, updateBookDto);
+      return await this.bookRepository.save(book);
+    } catch (error) {
+      throw new InternalServerErrorException(error);
+    }
   }
 
   async remove(id: string) {
-    const result = await this.bookRepository.delete(id);
-    if (result.affected === 0) {
-      throw new NotFoundException(`A book "${id}" was not found`);
+    try {
+      const result = await this.bookRepository.delete(id);
+      if (result.affected === 0) {
+        throw new NotFoundException(`A book "${id}" was not found`);
+      }
+      return { message: 'Book successfully deleted' };
+    } catch (error) {
+      throw new InternalServerErrorException(error);
     }
-    return { message: 'Book successfully deleted' };
   }
 }

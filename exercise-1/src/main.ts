@@ -15,7 +15,7 @@ async function bootstrap() {
   app.useGlobalInterceptors(new LoggerErrorInterceptor());
   app.useGlobalFilters(new AllExceptionsFilter(app.get(Logger)));
 
-  const PORT = process.env.PORT || 3000;
+  const PORT = 8080
 
 
   await app.listen(PORT, () => {

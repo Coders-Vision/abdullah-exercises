@@ -6,7 +6,7 @@
 ```markdown
 # Exercise 1: CRUD Application (Book Store)
 
-This folder contains a NestJS-based CRUD application designed for demonstration purposes.
+This folder contains a NestJS-based CRUD application (Book Store) designed for demonstration purposes.
 
 ---
 
@@ -16,16 +16,22 @@ This folder contains a NestJS-based CRUD application designed for demonstration 
    - Application runs inside Docker containers using **Docker Compose**.
    - Simplifies setup and ensures consistent development environments.
 
-2. **Logger**:
+2. **Package Management**:
+   - Uses **pnpm** as the package manager for faster installations and efficient disk space usage.
+   - Benefits of pnpm:
+     - Creates a single store for all dependencies, avoiding duplication.
+     - Faster installation and rebuild times compared to npm and yarn.   
+
+3. **Logger**:
    - Integrated **Nest Pino** for efficient and structured logging.
 
-3. **Database**:
+4. **Database**:
    - Uses **SQLite** with **TypeORM** for persistence, suitable for demo purposes.
 
-4. **API Documentation**:
+5. **API Documentation**:
    - Interactive API documentation generated using **Swagger**.
 
-5. **Error Handling**:
+6. **Error Handling**:
    - Custom **`ExceptionFilter`** for consistent and robust error responses.
 
 ---
@@ -88,7 +94,7 @@ This command will:
 
 ### API Documentation
 
-- Swagger UI is automatically available at `/api`.
+- Swagger UI is automatically available at `/api-docs`.
 - Provides a clear overview of available endpoints, request/response schemas, and status codes.
 
 ---

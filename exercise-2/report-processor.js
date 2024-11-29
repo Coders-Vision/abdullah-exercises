@@ -45,8 +45,9 @@ async function generateReports(inputFileName) {
   }
   const { productTotals, brandCounts } = await parseCSV(filePath);
   //   console.log("Products by QTY and Orders", productTotals);
-  //   console.log("No. of Product Brand in Orders", brandCounts);
+  //   console.log("No. of Brands for a Product in Orders", brandCounts);
   writeAverageQuantities(`0_${inputFileName}`, productTotals);
+  writeMostPopularBrands(`1_${inputFileName}`, brandCounts);
 }
 
 function writeAverageQuantities(outputFileName, productTotals) {
@@ -63,6 +64,22 @@ function writeAverageQuantities(outputFileName, productTotals) {
     .join("\n");
 
   fs.writeFileSync(outputFileName, outputData);
+  console.log(`Created file ${outputFileName}`);
+}
+
+// Function to calculate most popular brands and write to the second output file
+function writeMostPopularBrands(outputFileName, brandCounts) {
+  const outputData = Object.entries(brandCounts)
+    .map(([productName, brands]) => {
+      const mostPopularBrand = Object.entries(brands).reduce((a, b) =>
+        b[1] > a[1] ? b : a
+      )[0];
+      return `${productName},${mostPopularBrand}`;
+    })
+    .join("\n");
+
+  fs.writeFileSync(outputFileName, outputData);
+
   console.log(`Created file ${outputFileName}`);
 }
 

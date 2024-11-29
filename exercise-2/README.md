@@ -35,7 +35,7 @@ Ensure you have the following installed:
 ### 1. **Clone the Repository**
 
 ```bash
-git clone <repository_url>
+git clone https://github.com/Coders-Vision/abdullah-exercises.git
 cd exercise-2
 ```
 
@@ -45,11 +45,11 @@ Place your input CSV file in the project directory. The file should follow this 
 
 | Column Name   | Description                            |
 |---------------|----------------------------------------|
-| ID            | Order ID                              |
-| Area          | Delivery location                     |
-| Product Name  | Name of the product ordered           |
-| Quantity      | Quantity of the product in the order  |
-| Brand         | Brand of the product                  |
+| ID            | Order ID                               |
+| Area          | Delivery location                      |
+| Product Name  | Name of the product ordered            |
+| Quantity      | Quantity of the product in the order   |
+| Brand         | Brand of the product                   |
 
 Example file content:
 ```
@@ -118,7 +118,7 @@ ID426632,Willa Hollow,Intelligent Copper Knife,4,Hilll-Gorczany
 Run the script:
 
 ```bash
-node processOrders.js orders.csv
+node order-processor.js orders.csv
 ```
 
 ### Expected Output Files

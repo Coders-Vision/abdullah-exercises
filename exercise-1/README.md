@@ -42,8 +42,8 @@ This folder contains a NestJS-based CRUD application designed for demonstration 
 ### 1. **Clone the Repository**
 
 ```bash
-git clone <repository_url>
-cd <repository_folder>/exercise-1
+git clone https://github.com/Coders-Vision/abdullah-exercises.git
+cd exercise-1
 ```
 
 ---
@@ -65,7 +65,7 @@ This command will:
 ### 3. **Access the Application**
 
 - API Base URL: `http://localhost:8080/api`
-- Swagger Documentation: `http://localhost:3000/api-docs`
+- Swagger Documentation: `http://localhost:8080/api-docs`
 
 ---
 

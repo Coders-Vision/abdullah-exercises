@@ -4,6 +4,7 @@ import { ResponseInterceptor } from './common/interceptors/response.interceptor'
 import { AllExceptionsFilter } from './common/filters/http-exception.filter';
 import { AppModule } from './app.module';
 import { Logger, LoggerErrorInterceptor } from 'nestjs-pino';
+import { setupSwagger } from './common/swagger';
 
 async function bootstrap() {
   const app = await NestFactory.create(AppModule);
@@ -17,7 +18,7 @@ async function bootstrap() {
 
   const PORT = 8080
 
-
+  setupSwagger(app, 'Book Store App', 'API documentation for Book Store App', '1.0');
   await app.listen(PORT, () => {
     const HOST = `http://localhost:${PORT}`
     console.log(` 

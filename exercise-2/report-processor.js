@@ -44,9 +44,26 @@ async function generateReports(inputFileName) {
     process.exit(1);
   }
   const { productTotals, brandCounts } = await parseCSV(filePath);
-  console.log("Products by QTY and Orders", productTotals);
-  console.log("No. of Product Brand in Orders", brandCounts);
+  //   console.log("Products by QTY and Orders", productTotals);
+  //   console.log("No. of Product Brand in Orders", brandCounts);
+  writeAverageQuantities(`0_${inputFileName}`, productTotals);
+}
 
+function writeAverageQuantities(outputFileName, productTotals) {
+  // Converting the 'productTotals' to an array by extracting its key to consolidate the total sum of orders by using 'reduce' function
+  const totalOrders = Object.values(productTotals).reduce(
+    (acc, item) => acc + item.orders,
+    0
+  );
+  const outputData = Object.entries(productTotals)
+    .map(([productName, totals]) => {
+      const avgQuantity = totals.quantity / totalOrders;
+      return `${productName},${avgQuantity.toFixed(3)}`;
+    })
+    .join("\n");
+
+  fs.writeFileSync(outputFileName, outputData);
+  console.log(`Created file ${outputFileName}`);
 }
 
 // Entry point

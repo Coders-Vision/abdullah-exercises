@@ -36,7 +36,7 @@ Ensure you have the following installed:
 
 ```bash
 git clone <repository_url>
-cd <repository_folder>
+cd exercise-2
 ```
 
 ### 2. **Prepare the Input File**
@@ -118,7 +118,7 @@ ID426632,Willa Hollow,Intelligent Copper Knife,4,Hilll-Gorczany
 Run the script:
 
 ```bash
-node order-processor.js orders.csv
+node processOrders.js orders.csv
 ```
 
 ### Expected Output Files
@@ -134,21 +134,3 @@ node order-processor.js orders.csv
   Intelligent Copper Knife,Hilll-Gorczany
   Small Granite Shoes,Rowe and Legros
   ```
-
----
-
-## **Constraints**
-
-- Handles up to 10,000 rows efficiently.
-- Assumes input CSV files have valid formatting as described.
-
----
-
-## **Folder Structure**
-
-```plaintext
-.
-├── processOrders.js   # Main script file
-├── README.md          # Instructions for usage
-└── example.csv        # Example input file (optional)
-```

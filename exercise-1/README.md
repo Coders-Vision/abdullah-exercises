@@ -71,7 +71,7 @@ This command will:
 
 ### 3. **Access the Application**
 
-- API Base URL: `http://localhost:8080`
+- API Base URL: `http://localhost:8080/api`
 - Swagger Documentation: `http://localhost:8080/api-docs`
 
 

@@ -1,0 +1,156 @@
+{
+    "info": {
+        "_postman_id": "81ffb478-13b3-4bff-b876-5ccdefd246fd",
+        "name": "EX-1-Book Store App",
+        "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+        "description": ""
+    },
+    "item": [
+        {
+            "name": "Create Book",
+            "request": {
+                "method": "POST",
+                "url": {
+                    "raw": "http://localhost:8080/api/books",
+                    "path": [
+                        "api",
+                        "books"
+                    ],
+                    "protocol": "http",
+                    "host": [
+                        "localhost"
+                    ],
+                    "port": "8080"
+                },
+                "header": [
+                    {
+                        "key": "User-Agent",
+                        "value": "",
+                        "disabled": true
+                    }
+                ],
+                "body": {
+                    "mode": "raw",
+                    "options": {
+                        "raw": {
+                            "language": "json"
+                        }
+                    },
+                    "raw": "{\n  \"title\": \"Charlotte's Web\",\n  \"author\": \"E.B. White\",\n  \"isbn\": \"978-0061124952\",\n  \"description\": \"The story of a pig named Wilbur and his friendship with a spider named Charlotte, who writes words in her web to save him.\",\n  \"publishedYear\": 1952,\n  \"publisher\": \"Harper & Brothers\",\n  \"price\": 7.5,\n  \"stock\": 30\n}"
+                }
+            }
+        },
+        {
+            "name": "Get All Books",
+            "request": {
+                "method": "GET",
+                "url": {
+                    "raw": "http://localhost:8080/api/books",
+                    "path": [
+                        "api",
+                        "books"
+                    ],
+                    "protocol": "http",
+                    "host": [
+                        "localhost"
+                    ],
+                    "port": "8080"
+                },
+                "header": [
+                    {
+                        "key": "User-Agent",
+                        "value": "Thunder Client (https://www.thunderclient.com)",
+                        "disabled": true
+                    }
+                ]
+            }
+        },
+        {
+            "name": "Get Book By Id",
+            "request": {
+                "method": "GET",
+                "url": {
+                    "raw": "http://localhost:8080/api/books/6a3a6a9a-d883-4722-b220-e4e22595bc1d",
+                    "path": [
+                        "api",
+                        "books",
+                        "6a3a6a9a-d883-4722-b220-e4e22595bc1d"
+                    ],
+                    "protocol": "http",
+                    "host": [
+                        "localhost"
+                    ],
+                    "port": "8080"
+                },
+                "header": [
+                    {
+                        "key": "User-Agent",
+                        "value": "Thunder Client (https://www.thunderclient.com)",
+                        "disabled": true
+                    }
+                ]
+            }
+        },
+        {
+            "name": "Update Book By Id",
+            "request": {
+                "method": "PATCH",
+                "url": {
+                    "raw": "http://localhost:8080/api/books/6a3a6a9a-d883-4722-b220-e4e22595bc1d",
+                    "path": [
+                        "api",
+                        "books",
+                        "6a3a6a9a-d883-4722-b220-e4e22595bc1d"
+                    ],
+                    "protocol": "http",
+                    "host": [
+                        "localhost"
+                    ],
+                    "port": "8080"
+                },
+                "header": [
+                    {
+                        "key": "User-Agent",
+                        "value": "Thunder Client (https://www.thunderclient.com)",
+                        "disabled": true
+                    }
+                ],
+                "body": {
+                    "mode": "raw",
+                    "options": {
+                        "raw": {
+                            "language": "json"
+                        }
+                    },
+                    "raw": "{\n  \"title\": \"Winnie-the-Pooh\",\n  \"author\": \"A.A. Milne\",\n  \"isbn\": \"978-0525444435\",\n  \"description\": \"Adventures in the Hundred Acre Wood with Winnie-the-Pooh and friends.\",\n  \"publishedYear\": 1926,\n  \"publisher\": \"Methuen & Co.\",\n  \"price\": 10,\n  \"stock\": 50\n}"
+                }
+            }
+        },
+        {
+            "name": "Delete Book By Id",
+            "request": {
+                "method": "DELETE",
+                "url": {
+                    "raw": "http://localhost:8080/api/books/6a3a6a9a-d883-4722-b220-e4e22595bc1d",
+                    "path": [
+                        "api",
+                        "books",
+                        "6a3a6a9a-d883-4722-b220-e4e22595bc1d"
+                    ],
+                    "protocol": "http",
+                    "host": [
+                        "localhost"
+                    ],
+                    "port": "8080"
+                },
+                "header": [
+                    {
+                        "key": "User-Agent",
+                        "value": "Thunder Client (https://www.thunderclient.com)",
+                        "disabled": true
+                    }
+                ]
+            }
+        }
+    ]
+}

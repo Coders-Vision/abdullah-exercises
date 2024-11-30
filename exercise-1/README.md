@@ -1,12 +1,13 @@
+Here's the updated **Exercise 1 README** with both Postman collection and Swagger documentation testing instructions included:
 
 ---
 
 ### **Exercise 1 README (`exercise-1/README.md`)**
 
 ```markdown
-# Exercise 1: CRUD Application (Book Store)
+# Exercise 1: Book Store CRUD Application 
 
-This folder contains a NestJS-based CRUD application (Book Store) designed for demonstration purposes.
+This folder contains a NestJS-based CRUD application designed for demonstration purposes.
 
 ---
 
@@ -20,7 +21,7 @@ This folder contains a NestJS-based CRUD application (Book Store) designed for d
    - Uses **pnpm** as the package manager for faster installations and efficient disk space usage.
    - Benefits of pnpm:
      - Creates a single store for all dependencies, avoiding duplication.
-     - Faster installation and rebuild times compared to npm and yarn.   
+     - Faster installation and rebuild times compared to npm and yarn.
 
 3. **Logger**:
    - Integrated **Nest Pino** for efficient and structured logging.
@@ -34,6 +35,9 @@ This folder contains a NestJS-based CRUD application (Book Store) designed for d
 6. **Error Handling**:
    - Custom **`ExceptionFilter`** for consistent and robust error responses.
 
+7. **Postman Collection**:
+   - A ready-to-use Postman collection (`postman_EX-1-Book Store App.json`) is included for testing the APIs.
+
 ---
 
 ## Setup Instructions
@@ -41,8 +45,6 @@ This folder contains a NestJS-based CRUD application (Book Store) designed for d
 ### Prerequisites
 
 - **Docker** and **Docker Compose** installed on your system.
-- Basic understanding of NestJS and TypeScript.
-
 ---
 
 ### 1. **Clone the Repository**
@@ -70,13 +72,41 @@ This command will:
 
 ### 3. **Access the Application**
 
-- API Base URL: `http://localhost:8080/api`
+- API Base URL: `http://localhost:8080`
 - Swagger Documentation: `http://localhost:8080/api-docs`
-
----
 
 
 ## Development Notes
+
+### Postman Collection
+
+- A Postman collection file named `postman_EX-1-Book Store App.json` is included in this folder.
+- Import this file into Postman to test the application's APIs directly.
+
+---
+
+### Testing Instructions
+
+You can test the application in two ways:
+
+1. **Using Postman**:
+   - Import `postman_EX-1-Book Store App.json` into Postman.
+   - Update the environment variables (if any) to match your setup.
+   - Execute requests to test the APIs.
+
+2. **Using Swagger UI**:
+   - Open your browser and navigate to [http://localhost:8080/api-docs](http://localhost:8080/api-docs).
+   - Interact with the API endpoints directly via the Swagger interface.
+
+---
+
+### Package Manager: pnpm
+
+- Efficiently handles dependencies with a global content-addressable storage.
+- Reduces disk usage and installation time compared to npm and yarn.
+- Ensures consistent dependency trees, improving reliability.
+
+---
 
 ### Logger
 
@@ -107,7 +137,6 @@ Custom **`ExceptionFilter`** ensures:
 
 ---
 
-
 ## Stopping the Application
 
 To stop and remove containers, use:
@@ -124,13 +153,3 @@ docker-compose down
 - Enhance authentication and authorization mechanisms.
 
 ---
-
-```
-
----
-
-### Highlights in This README:
-- **Docker**: Instructions to build and run with Docker Compose.
-- **Feature Details**: Explains why Nest Pino, SQLite, Swagger, and ExceptionFilters are used.
-- **Access Information**: Clearly specifies where to access the API and Swagger UI.
-- **Future Improvements**: Encourages reviewers to see how the demo can evolve.

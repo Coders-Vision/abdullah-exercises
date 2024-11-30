@@ -1,4 +1,3 @@
-Here's the updated **Exercise 1 README** with both Postman collection and Swagger documentation testing instructions included:
 
 ---
 

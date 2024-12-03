@@ -1,14 +1,34 @@
 
 ---
 
-### **Exercise 1 README (`exercise-1/README.md`)**
+# **Exercise-1 (Book Store)**
 
-```markdown
-# Exercise 1: Book Store CRUD Application 
-
-This folder contains a NestJS-based CRUD application designed for demonstration purposes.
+This is a full-stack project for demo purposes featuring a **NestJS** backend and a **React Typescript (Vite)** frontend. It uses **Axios** for HTTP requests and **Tailwind CSS** for styling.  
 
 ---
+
+## **Project Structure**  
+
+```plaintext
+exercise-1/
+|--- backend/
+|      <NestJS backend application with its own package.json and pnpm-lock.yaml>
+|--- frontend/
+|      <React (Vite) frontend application with its own package.json and pnpm-lock.yaml>
+|--- Dockerfile
+|--- docker-compose.yml
+```
+### **Backend**  
+- [NestJS](https://nestjs.com/) - A progressive Node.js framework for building efficient, reliable, and scalable server-side applications.
+- [TypeScript](https://www.typescriptlang.org/) - A superset of JavaScript with static typing.  
+- [pnpm](https://pnpm.io/) - A fast, disk space-efficient package manager.  
+- [Serve-Static Module](https://docs.nestjs.com/techniques/serve-static) - To serve static frontend files from the backend.  
+
+### **Frontend**  
+- [React (Vite)](https://vitejs.dev/) - A fast frontend development build tool.  
+- [Tailwind CSS](https://tailwindcss.com/) - A utility-first CSS framework for styling.  
+- [Axios](https://axios-http.com/) - A promise-based HTTP client for making API requests.  
+
 
 ## Features
 
@@ -31,10 +51,15 @@ This folder contains a NestJS-based CRUD application designed for demonstration 
 5. **API Documentation**:
    - Interactive API documentation generated using **Swagger**.
 
-6. **Error Handling**:
+6. **React+Vite**:
+   - Dedicated Web Portal implemented using React **React+Vite**.
+   - Added Tailwind CSS for styling **Tailwind CSS**.
+   - Using Axios for Backend API calls to Nestjs Server**Axios**.
+
+7. **Error Handling**:
    - Custom **`ExceptionFilter`** for consistent and robust error responses.
 
-7. **Postman Collection**:
+8. **Postman Collection**:
    - A ready-to-use Postman collection (`postman_EX-1-Book Store App.json`) is included for testing the APIs.
 
 ---
@@ -42,8 +67,10 @@ This folder contains a NestJS-based CRUD application designed for demonstration 
 ## Setup Instructions
 
 ### Prerequisites
-
-- **Docker** and **Docker Compose** installed on your system.
+Ensure you have the following installed on your system:  
+- **Node.js** (v20.x or higher).
+- **pnpm** (v8.x or higher).
+- **Docker**  installed on your system.
 ---
 
 ### 1. **Clone the Repository**
@@ -55,22 +82,31 @@ cd exercise-1
 
 ---
 
-### 2. **Start the Application**
+### **2. Run Locally (Without Docker)**  
 
-Run the application using Docker Compose:
+#### **Backend**  
+```bash
+cd backend
+pnpm install
+pnpm start:dev
+```
 
+#### **Frontend**  
+```bash
+cd frontend
+pnpm install
+pnpm run dev
+```
+
+### **3. Run with Docker Compose**  
 ```bash
 docker-compose up --build
 ```
 
-This command will:
-- Build the Docker images.
-- Start the application and its dependencies.
-
----
-
 ### 3. **Access the Application**
 
+- Web Portal URL: `http://localhost:8080`
+- Web Portal URL: `http://localhost:8081` (Without Docker)
 - API Base URL: `http://localhost:8080/api`
 - Swagger Documentation: `http://localhost:8080/api-docs`
 
@@ -150,5 +186,7 @@ docker-compose down
 
 - Replace SQLite with a more robust database like PostgreSQL for production use.
 - Enhance authentication and authorization mechanisms.
+- For Better Scalablity we can go with Monorepo Approach while integrating Frontend Framework with React.
+- We can add React Query or Redux Toolkit for better state management.
 
 ---

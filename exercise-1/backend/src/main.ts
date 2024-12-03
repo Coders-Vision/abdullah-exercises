@@ -16,18 +16,28 @@ async function bootstrap() {
   app.useGlobalInterceptors(new LoggerErrorInterceptor());
   app.useGlobalFilters(new AllExceptionsFilter(app.get(Logger)));
 
-  const PORT = 8080
+  const PORT = 8080;
+  const getFrontEndUrls = ['http://localhost:8081'];
 
-  setupSwagger(app, 'Book Store App', 'API documentation for Book Store App', '1.0');
+  app.enableCors({
+    origin: getFrontEndUrls,
+  });
+
+  setupSwagger(
+    app,
+    'Book Store App',
+    'API documentation for Book Store App',
+    '1.0',
+  );
   await app.listen(PORT, () => {
-    const HOST = `http://localhost:${PORT}`
+    const HOST = `http://localhost:${PORT}`;
     console.log(` 
      Book store app started successfully
      Node Version : ${process.version}
-     Port : ${(`${PORT}`)} 
-     Date : ${(`${new Date().toLocaleString()}`)}
+     Port : ${`${PORT}`} 
+     Date : ${`${new Date().toLocaleString()}`}
      Timezone : ${Intl.DateTimeFormat().resolvedOptions().timeZone}
-     Env  : ${(`${process.env.NODE_ENV}`)}
+     Env  : ${`${process.env.NODE_ENV}`}
     `);
   });
 }

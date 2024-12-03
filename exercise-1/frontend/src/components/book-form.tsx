@@ -3,35 +3,33 @@ import { Book } from "../types/book";
 
 interface BookFormProps {
   onSubmit: (book: Book) => void;
+  onClearSelectedBook: () => void;
   selectedBook: Book | null;
 }
 
-function BookForm({ onSubmit, selectedBook }: BookFormProps) {
-  const [book, setBook] = useState<Book>({
-    title: "",
-    author: "",
-    isbn: "",
-    description: "",
-    publishedYear: 0,
-    publisher: "",
-    price: 0,
-    stock: 0,
-  });
+const initialBook = {
+  title: "",
+  author: "",
+  isbn: "",
+  description: "",
+  publishedYear: 0,
+  publisher: "",
+  price: 0,
+  stock: 0,
+};
+
+function BookForm({
+  onSubmit,
+  selectedBook,
+  onClearSelectedBook,
+}: BookFormProps) {
+  const [book, setBook] = useState<Book>(initialBook);
 
   useEffect(() => {
     if (selectedBook) {
       setBook(selectedBook);
     } else {
-      setBook({
-        title: "",
-        author: "",
-        isbn: "",
-        description: "",
-        publishedYear: 0,
-        publisher: "",
-        price: 0,
-        stock: 0,
-      });
+      setBook(initialBook);
     }
   }, [selectedBook]);
 
@@ -51,16 +49,12 @@ function BookForm({ onSubmit, selectedBook }: BookFormProps) {
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
     onSubmit(book);
-    setBook({
-      title: "",
-      author: "",
-      isbn: "",
-      description: "",
-      publishedYear: 0,
-      publisher: "",
-      price: 0,
-      stock: 0,
-    });
+    setBook(initialBook);
+  };
+  const handleClearBook = (e: React.FormEvent) => {
+    e.preventDefault();
+    setBook(initialBook);
+    onClearSelectedBook();
   };
 
   return (
@@ -130,12 +124,20 @@ function BookForm({ onSubmit, selectedBook }: BookFormProps) {
             required
           />
         </div>
-        <button
-          type="submit"
-          className="px-4 py-2 bg-blue-500 text-white rounded"
-        >
-          {selectedBook ? "Update" : "Add"}
-        </button>
+        <div className="flex justify-center items-center">
+          <button
+            type="submit"
+            className="px-4 py-2 bg-blue-500 text-white rounded mr-2"
+          >
+            {selectedBook ? "Update" : "Add"}
+          </button>
+          <button
+            onClick={handleClearBook}
+            className="px-4 py-2 bg-red-500 text-white rounded"
+          >
+            Clear
+          </button>
+        </div>
       </form>
     </div>
   );

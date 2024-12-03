@@ -1,4 +1,6 @@
 import { useState, useEffect } from "react";
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css'; // Import the toast styles
 import { Book } from "./types/book";
 import BookForm from "./components/book-form";
 import BookList from "./components/book-list";
@@ -14,6 +16,7 @@ const App = () => {
       setBooks(booksData);
     } catch (error) {
       console.error("Failed to fetch books:", error);
+      toast.error('Failed to fetch books');
     }
   };
 
@@ -21,7 +24,9 @@ const App = () => {
     try {
       const newBook = await addBook(book);
       setBooks([...books, newBook]);
+      toast.success('Book added successfully!');
     } catch (error) {
+      toast.error('Failed to add book');
       console.error("Failed to add book:", error);
     }
     fetchBooks();
@@ -33,7 +38,9 @@ const App = () => {
       const updatedBook = await updateBook(selectedBook.id!, book);
       setBooks(books.map((b) => (b.id === selectedBook.id ? updatedBook : b)));
       setSelectedBook(null);
+      toast.success('Book updated successfully!');
     } catch (error) {
+      toast.error('Failed to update book');
       console.error("Failed to update book:", error);
     }
     fetchBooks();
@@ -43,7 +50,9 @@ const App = () => {
     try {
       await deleteBook(id);
       setBooks(books.filter((b) => b.id !== id));
+      toast.success('Book deleted successfully!');
     } catch (error) {
+      toast.error('Failed to delete book');
       console.error("Failed to delete book:", error);
     }
     fetchBooks();
@@ -60,6 +69,9 @@ const App = () => {
   const handleDelete = (id: string) => {
     handleDeleteBook(id);
   };
+  const handleOnSelectedBook = () => {
+    setSelectedBook(null);
+  };
 
   useEffect(() => {
     fetchBooks();
@@ -70,12 +82,18 @@ const App = () => {
       <h1 className="text-2xl font-bold text-center mb-6">Book Store</h1>
       <div className="flex flex-col lg:flex-row gap-6">
         <div className="w-full lg:w-2/4">
-          <BookForm onSubmit={handleFormSubmit} selectedBook={selectedBook} />
+          <BookForm
+            onSubmit={handleFormSubmit}
+            selectedBook={selectedBook}
+            onClearSelectedBook={handleOnSelectedBook}
+          />
         </div>
         <div className="w-full lg:w-3/4">
           <BookList books={books} onEdit={handleEdit} onDelete={handleDelete} />
         </div>
       </div>
+        {/* Toast Container */}
+        <ToastContainer />
     </div>
   );
 };

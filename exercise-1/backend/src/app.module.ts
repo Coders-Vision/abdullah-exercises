@@ -5,7 +5,6 @@ import { Book } from './common/enities/book.entity';
 import { LoggerModule } from './common/logger';
 import { ServeStaticModule } from '@nestjs/serve-static';
 import { join } from 'path';
-import { AppController } from './app.controller';
 
 @Module({
   imports: [
@@ -21,6 +20,6 @@ import { AppController } from './app.controller';
     }),
     BooksModule,
   ],
-  controllers:[AppController]
+  controllers:[]
 })
 export class AppModule {}

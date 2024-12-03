@@ -9,7 +9,7 @@ interface BookListProps {
 function BookList({ books, onDelete, onEdit }: BookListProps) {
   return (
     <div className="mx-2">
-      {Array.isArray(books) &&
+      {Array.isArray(books) && books.length > 0 ? (
         books?.map((book) => (
           <div key={book.id} className="bg-gray-100 p-4 rounded shadow-md mb-4">
             <h3 className="text-lg font-bold">{book.title}</h3>
@@ -19,7 +19,7 @@ function BookList({ books, onDelete, onEdit }: BookListProps) {
               Published Year: {book.publishedYear}
             </p>
             <p className="text-gray-600">Publisher: {book.publisher}</p>
-            <p className="text-gray-600">Price: ${book.price}</p>
+            <p className="text-gray-600">Price: KWD {book.price}</p>
             <p className="text-gray-600">Stock: {book.stock}</p>
             <p className="text-gray-600">Description: {book.description}</p>
             <div className="mt-2">
@@ -37,7 +37,14 @@ function BookList({ books, onDelete, onEdit }: BookListProps) {
               </button>
             </div>
           </div>
-        ))}
+        ))
+      ) : (
+        <div>
+          <p className="text-gray-600 text-center">
+            Please Add a Book from the form
+          </p>
+        </div>
+      )}
     </div>
   );
 }

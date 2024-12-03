@@ -1,51 +1,68 @@
-# Base stage to have pnpm installed
-FROM node:20-alpine as base
+# Step 1: Build the frontend
+FROM node:20-alpine as frontend
 
+# Install pnpm
 RUN npm i -g pnpm
 
-WORKDIR /usr/src/backend
+# Set the working directory for frontend
+WORKDIR /usr/src/frontend
 
-COPY package*.json pnpm-lock.yaml ./
+# Copy the frontend package.json and pnpm-lock.yaml
+COPY frontend/package*.json frontend/pnpm-lock.yaml ./
 
+# Install frontend dependencies
 RUN pnpm install
 
-# Build stage
-FROM base as build
+# Copy the rest of the frontend files
+COPY frontend ./
 
-# Copy application source
-COPY . .
-
-# Build NestJS app
+# Build the frontend assets
 RUN pnpm build
 
-# Build React app
-WORKDIR /usr/src/frontend
-RUN pnpm install
-RUN pnpm run build
+# Step 2: Build the backend (NestJS)
+FROM node:20-alpine as backend
 
-# Production stage
-FROM node:20-alpine as production
-
+# Install pnpm
 RUN npm i -g pnpm
 
+# Set the working directory for backend
 WORKDIR /usr/src/backend
 
-# Copy production dependencies
-COPY package*.json pnpm-lock.yaml ./
+# Copy the backend package.json and pnpm-lock.yaml
+COPY backend/package*.json backend/pnpm-lock.yaml ./
+
+# Install backend dependencies
+RUN pnpm install
+
+# Copy the rest of the backend files
+COPY backend ./
+
+# Build the backend (NestJS)
+RUN pnpm build
+
+# Step 3: Create production image
+FROM node:20-alpine as production
+
+# Set the working directory
+WORKDIR /usr/src/app
+
+# Install pnpm
+RUN npm i -g pnpm
+
+# Copy backend code and the frontend build assets
+COPY --from=frontend /usr/src/frontend/dist /usr/src/app/frontend/dist
+COPY --from=backend /usr/src/backend/dist /usr/src/app/backend/dist
+
+# Install only production dependencies for backend
+COPY backend/package*.json backend/pnpm-lock.yaml ./
 RUN pnpm install --prod
 
-# Copy NestJS build output
-COPY --from=build /usr/src/dist ./dist
-
-# Copy React build output
-COPY --from=build /usr/src/frontend/dist ./frontend/dist
-
-# Set environment variable
+# Set environment variable for production
 ARG NODE_ENV=production
 ENV NODE_ENV=${NODE_ENV}
 
 # Expose application port
 EXPOSE 8080
 
-# Run NestJS app
-CMD ["node", "dist/main"]
+# Run the NestJS application
+CMD ["node", "backend/dist/main"]
